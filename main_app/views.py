@@ -13,9 +13,9 @@ class PostList(TemplateView):
         context = super().get_context_data(**kwargs)
         title = self.request.GET.get("title")
         if title != None:
-            context["posts"] = Post.objects.filter(title__icontains=title, user=self.request.user)
+            # context["posts"] = Post.objects.filter(title__icontains=title, user=self.request.user)
             context["header"] = f"Searching for {title}"
         else:
-            context["posts"] = Post.objects.filter(user=self.request.user)
+            # context["posts"] = Post.objects.filter(user=self.request.user)
             context["header"] = "All Posts"
         return context
