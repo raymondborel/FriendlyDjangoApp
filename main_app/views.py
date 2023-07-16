@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
+from django.views.generic import DetailView
 from django.views import View
 from .models import Post
 
@@ -23,6 +24,10 @@ class PostList(TemplateView):
     
 class PostCreate(CreateView):
     model = Post
-    fields = ['name', 'img', 'body']
+    fields = ['title', 'img', 'body']
     template_name = "post_create.html"
     success_url = '/posts/'
+
+class PostDetail(DetailView):
+    model = Post
+    template_name = "post_detail.html"
