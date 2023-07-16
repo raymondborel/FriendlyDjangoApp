@@ -18,8 +18,10 @@
     <title>Friendly - {% block title %}{% endblock %}</title>
   </head>
   <body>
-    <div><a class="navbar-menu navabar-end"href="/posts">Posts</a></div>
-    <a class="navbar-menu navabar-end"href="/">home</a>
+    <div class="has-text-centered">
+      <a href="/posts">Posts</a>
+      <a class="has-text-centered" href="/">Home</a>
+    </div>
 
     {% block content %}{% endblock %}
   </body>
