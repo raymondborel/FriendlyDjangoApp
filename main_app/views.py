@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import DetailView
 from django.views import View
 from .models import Post
@@ -31,3 +31,9 @@ class PostCreate(CreateView):
 class PostDetail(DetailView):
     model = Post
     template_name = "post_detail.html"
+
+class PostUpdate(UpdateView):
+    model = Post
+    fields = ['title', 'img', 'body']
+    template_name = "post_update.html"
+    success_url = "/posts/"
