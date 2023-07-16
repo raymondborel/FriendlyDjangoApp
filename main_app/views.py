@@ -23,6 +23,6 @@ class PostList(TemplateView):
     
 class PostCreate(CreateView):
     model = Post
-    fields = ['name', 'image', 'bio']
+    fields = ['name', 'img', 'body']
     template_name = "post_create.html"
     success_url = '/posts/'
