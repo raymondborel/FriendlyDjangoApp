@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
 from django.views import View
 from .models import Post
 
@@ -19,3 +20,9 @@ class PostList(TemplateView):
             context["posts"] = Post.objects.all()
             context["header"] = "All Posts"
         return context
+    
+class PostCreate(CreateView):
+    model = Post
+    fields = ['name', 'image', 'bio']
+    template_name = "post_create.html"
+    success_url = '/posts/'
