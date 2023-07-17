@@ -1,19 +1,20 @@
-{% extends 'base.html' %} 
-{% block title %}Posts{% endblock %}
-
-
+{% extends 'base.html' %} {% block title %}Posts{% endblock %} 
 {% block content %}
-  <div class="container">
-    <div class="columns">
-      <div class="column is-three-quarters">
-        <div class="content">
-          <h1 class="title">{{ post.title }}</h1>
-          <img src="{{ post.img }}" alt="{{ post.title }}" class="post-image">
-          <p>{{ post.body }}</p>
-        </div>
-      </div>
-      <div class="column">
+<div class="container">
+  <div class="columns">
+    <div class="column">
+      <div class="content">
+        <h1 class="title">{{ post.title }}</h1>
+        <img src="{{ post.img }}" alt="{{ post.title }}" class="post-image" />
+        <p>{{ post.body }}</p>
       </div>
     </div>
   </div>
+</div>
+<a href="{% url 'post_update' post.pk %}" class="button is-info">
+  Update
+  <span class="icon">
+    <i class="fas fa-edit"></i>
+  </span>
+</a>
 {% endblock %}

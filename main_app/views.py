@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import DetailView
 from django.views import View
 from .models import Post
+from django.urls import reverse
 
 # Create your views here.
 class Home(TemplateView):
@@ -26,7 +27,8 @@ class PostCreate(CreateView):
     model = Post
     fields = ['title', 'img', 'body']
     template_name = "post_create.html"
-    success_url = '/posts/'
+    def get_success_url(self):
+        return reverse('post_detail', kwargs={'pk': self.object.pk})
 
 class PostDetail(DetailView):
     model = Post
@@ -36,4 +38,5 @@ class PostUpdate(UpdateView):
     model = Post
     fields = ['title', 'img', 'body']
     template_name = "post_update.html"
-    success_url = "/posts/"
+    def get_success_url(self):
+        return reverse('post_detail', kwargs={'pk': self.object.pk})
