@@ -7,12 +7,17 @@ from .models import Post
 from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+# Auth
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 
 
 # Create your views here.
 class Home(TemplateView):
     template_name = "home.html"
     
+@method_decorator(login_required, name='dispatch')
 class PostList(TemplateView):
     template_name = "post_list.html"
     def get_context_data(self, **kwargs):
