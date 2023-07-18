@@ -67,11 +67,13 @@
                 >Logout</a
               >
               {% else %}
-              <a class="button is-primary">
+              {% if request.path != "/accounts/signup/" %}
+              <a href="{% url 'signup' %}" class="button is-primary">
                 <strong>Sign up</strong>
               </a>
               {% if request.path != "/accounts/login/" %}
-              <a href="accounts/login/" class="button is-light"> Log in </a>
+              <a href="{% url 'login' %}" class="button is-light"> Log in </a>
+              {% endif %}
               {% endif %}
               {% endif %}
             </div>
