@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.views import View
 from .models import Post
 from django.urls import reverse
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+
 
 # Create your views here.
 class Home(TemplateView):
@@ -45,3 +48,20 @@ class PostDelete(DeleteView):
     model = Post
     template_name = "post_delete_confirmation.html"
     success_url = "/posts/"
+
+class Signup(View):
+    # show a form to fill out
+    def get(self, request):
+        form = UserCreationForm()
+        context = {"form": form}
+        return render(request, "registration/signup.html", context)
+    # on form submit, validate the form and login the user.
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("post_list")
+        else:
+            context = {"form": form}
+            return render(request, "registration/signup.html", context)
