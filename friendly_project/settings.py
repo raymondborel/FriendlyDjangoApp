@@ -51,6 +51,7 @@ MIDDLEWARE = [
 ]
 
 LOGIN_REDIRECT_URL = '/posts/'
+LOGOUT_REDIRECT_URL = '/'
 
 ROOT_URLCONF = 'friendly_project.urls'
 
