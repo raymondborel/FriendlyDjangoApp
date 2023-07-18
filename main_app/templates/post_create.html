@@ -1,18 +1,17 @@
 {% extends 'base.html' %} 
 {% block content %}
 <h1>Add an Post</h1>
-<table>
-  <form method="post" class="form">
-  <!-- Security Feature  -->
-    {% csrf_token %} 
-  <!--  Generate inputs  -->
-    <div class="field">
-      {{form.as_p}} 
+
+<form method="post" class="form">
+<!-- Security Feature  -->
+  {% csrf_token %} 
+<!--  Generate inputs  -->
+  <div class="field">
+    {{form.as_p}} 
+  </div>
+<!--  Submit form  -->
+    <div class="control">
+        <input type="submit" value="Submit" class="button is-primary" />
     </div>
-  <!--  Submit form  -->
-      <div class="control">
-          <input type="submit" value="Submit" class="button is-primary" />
-      </div>
-  </form>
-</table>
+</form>
 {% endblock %}
