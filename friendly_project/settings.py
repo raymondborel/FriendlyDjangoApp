@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_app',
+    'crispy_bulma',
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -52,7 +55,6 @@ MIDDLEWARE = [
 
 LOGIN_REDIRECT_URL = '/posts/'
 LOGOUT_REDIRECT_URL = '/'
-
 
 ROOT_URLCONF = 'friendly_project.urls'
 
@@ -123,6 +125,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+# CRISPY_TEMPLATE_PACK = 'uni_form'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'main_app/static')]
 
 

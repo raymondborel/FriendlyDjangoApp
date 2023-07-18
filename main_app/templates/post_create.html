@@ -1,17 +1,22 @@
-{% extends 'base.html' %} 
-{% block content %}
-<h1>Add an Post</h1>
+{% extends 'base.html' %}
 
-<form method="post" class="form">
-<!-- Security Feature  -->
-  {% csrf_token %} 
-<!--  Generate inputs  -->
-  <div class="field">
-    {{form.as_table}} 
-  </div>
-<!--  Submit form  -->
-    <div class="control">
-        <input type="submit" value="Submit" class="button is-primary" />
-    </div>
+{% block content %}
+
+<h1>Add a Post</h1>
+
+<!-- Security Feature -->
+{% csrf_token %}
+
+{% load crispy_forms_tags %}
+<!-- Generate inputs -->
+
+<form method="post" class="my-class">
+    {{ my_formset|crispy }}
 </form>
+
+  <!-- Submit button -->
+  <div class="field">
+    <input type="submit" value="Submit" class="button is-primary" />
+  </div>
+
 {% endblock %}
