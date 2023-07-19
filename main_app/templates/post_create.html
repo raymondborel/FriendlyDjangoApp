@@ -3,14 +3,15 @@
 {% block title %}Add a Post{% endblock %}
 
 {% block content %}
-
-  <form method="post" novalidate class="my-form">
-    {% csrf_token %}
-    {{ form|crispy }}
-    
-    <div class="field">
-      <input type="submit" value="Submit" class="button is-primary" />
-    </div>
-    
-  </form>
+  <div class="mt-5">
+    <form method="post" novalidate class="my-form">
+      {% csrf_token %}
+      {{ form|crispy }}
+      
+      <div class="field">
+        <input type="submit" value="Submit" class="button is-primary" />
+      </div>
+      
+    </form>
+  </div>
 {% endblock %}

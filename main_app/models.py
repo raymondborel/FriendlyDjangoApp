@@ -18,8 +18,6 @@ class Post(models.Model):
     body = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1,  related_name='posts')
-    city = models.ForeignKey(City, on_delete=models.CASCADE, default=1, related_name='posts')
     
     def __str__(self):
         return self.title

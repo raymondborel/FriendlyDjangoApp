@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.views import View
-from .models import Post
+from .models import Post, City, Category
 from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -11,7 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-
+# categories = [ ]
 
 # Create your views here.
 class Home(TemplateView):
@@ -28,6 +28,19 @@ class PostList(TemplateView):
             context["header"] = f"Searching for {title}"
         else:
             context["posts"] = Post.objects.all()
+            context["header"] = "All Posts"
+        return context
+    
+class CategoryList(TemplateView):
+    template_name = "category_list.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        if name != None:
+            context["categorys"] = Category.objects.filter(name__icontains=name)
+            context["header"] = f"Searching for {name}"
+        else:
+            context["categorys"] = Category.objects.all()
             context["header"] = "All Posts"
         return context
     
@@ -53,6 +66,8 @@ class PostDelete(DeleteView):
     model = Post
     template_name = "post_delete_confirmation.html"
     success_url = "/posts/"
+
+
 
 class Signup(View):
     # show a form to fill out
