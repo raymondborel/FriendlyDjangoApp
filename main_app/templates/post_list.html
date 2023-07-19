@@ -8,12 +8,12 @@
     <h1 class="title is-1 text-center">Latest Blog Posts</h1>
     <div class="row">
       {% for post in posts %}
-      <div class="col-md-4">
+      <div class="col-md-12">
         <a href="{% url 'post_detail' post.pk %}">
-          <div class="card mb-4">
-            <img src="{{post.img}}" alt="{{post.title}}" class="card-img-top" />
+          <div class="card mb-4 d-flex">
+            <img src="{{post.img}}" alt="{{post.title}}" class="card-img-left" style="max-width: 200px; max-height: 150px; object-fit: cover;" />
             <div class="card-body">
-              <h2 class="card-title">{{ post.title }}</h2>
+              <p class="card-text">{{ post.body }}</p>
             </div>
           </div>
         </a>
@@ -29,4 +29,3 @@
   </div>
 </section>
 {% endblock %}
-
