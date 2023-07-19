@@ -66,7 +66,7 @@
           <div class="navbar-item">
             <div class="buttons">
               {% if user.is_authenticated %}
-              <span class="navbar-item">Welcome: {{user.username}}</span>
+              <span class="navbar-item"><a href="">Welcome: {{user.username}}</a></span>
               <a class="navbar-item button is-danger" href="{% url 'logout' %}"
                 >Logout</a
               >

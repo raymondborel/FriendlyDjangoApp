@@ -5,6 +5,7 @@ from django.views.generic import DetailView
 from django.views import View
 from django import forms
 from .models import Post, Category, Profile
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -89,6 +90,10 @@ class PostDetail(DetailView):
     model = Post
     template_name = "post_detail.html"
 
+class ProfileDetail(DetailView):
+    model = Profile
+    template_name = "profile_detail.html"
+
 class PostUpdate(UpdateView):
     model = Post
     fields = ['title', 'img', 'body']
@@ -101,11 +106,18 @@ class PostDelete(DeleteView):
     template_name = "post_delete_confirmation.html"
     success_url = "/posts/"
 
-class ProfileCreate(CreateView):
+class ProfileCreate(CreateView, LoginRequiredMixin):
     model = Profile
     fields = ['bio', 'profile_img', 'social_link']
     template_name = "profile_create.html"
-    success_url = '/profiles/'
+
+    def form_valid(self, form):
+        # Set the user before saving the form
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse('profile_detail', kwargs={'pk': self.object.pk})
 
 
 
