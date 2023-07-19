@@ -4,12 +4,12 @@
 
 {% block content %}
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="card mb-3">
+    <div class="card mx-auto" style="width: 80%;">
         <div class="row no-gutters">
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <img src="{{ profile_img }}" class="card-img">
             </div>
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">{{ post.user.name }}</h5>
                     <p class="card-text">{{ profile.bio }}</p>

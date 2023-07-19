@@ -58,12 +58,16 @@
 
           <a href="/categories/new/" class="navbar-item"> Create a Category </a>
 
-          <a href="/profiles/new/" class="navbar-item"> Create a Profile </a>
-
+          
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link"> More </a>
-
+            
             <div class="navbar-dropdown">
+              {% if user.profile %}
+              <a href="{% url 'profile_update' user.profile.pk %}" class="navbar-item"> Edit your Profile</a>
+              {% else %}
+              <a href="/profiles/new/" class="navbar-item"> Create a Profile </a>
+              {% endif %}
               <a class="navbar-item"> About </a>
               <a class="navbar-item"> Jobs </a>
               <a class="navbar-item"> Contact </a>

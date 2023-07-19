@@ -90,9 +90,6 @@ class PostDetail(DetailView):
     model = Post
     template_name = "post_detail.html"
 
-class ProfileDetail(DetailView):
-    model = Profile
-    template_name = "profile_detail.html"
 
 class PostUpdate(UpdateView):
     model = Post
@@ -100,11 +97,22 @@ class PostUpdate(UpdateView):
     template_name = "post_update.html"
     def get_success_url(self):
         return reverse('post_detail', kwargs={'pk': self.object.pk})
+
+class ProfileDetail(DetailView):
+    model = Profile
+    template_name = "profile_detail.html"
     
 class PostDelete(DeleteView):
     model = Post
     template_name = "post_delete_confirmation.html"
     success_url = "/posts/"
+
+class ProfileUpdate(UpdateView):
+    model = Profile
+    fields = ['bio', 'profile_img', 'social_link']
+    template_name = "profile_update.html"
+    def get_success_url(self):
+        return reverse('profile_detail', kwargs={'pk': self.object.pk})
 
 class ProfileCreate(CreateView, LoginRequiredMixin):
     model = Profile
