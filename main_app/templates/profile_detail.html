@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
-
-{% block title %}Your Profile{% endblock %}
-
+{% block title %}Profile{% endblock %}
 {% block content %}
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="card mx-auto" style="width: 80%;">
-        <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="{{ profile_img }}" class="card-img">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">{{ post.user.name }}</h5>
-                    <p class="card-text">{{ profile.bio }}</p>
-                    <p class="card-text"><small><a href="{{ profile.social_link }}">My Instagram</a></small></p>
-                    <p class="card-text"><small class="text-muted">User since {{ user.profile.created_at }}</small></p>
-                </div>
-            </div>
-        </div>
+<div class="container mt-5 bg-white">
+  <div class="row justify-content-center"> 
+    <div class="col-md-8"> 
+      <div class="content">
+        <h1 class="title">{{ post.title }}</h1>
+        <img src="{{ profile.profile_img }}" class="post-image img-fluid rounded"  /> 
+        <p>{{ profile.bio }}</p>
+      </div>
+      <div class="text-center"> 
+        <a href="{% url 'profile_update' user.profile.pk %}">
+          Update
+          <span class="icon">
+            <i class="fas fa-edit"></i>
+          </span>
+        </a>
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}
