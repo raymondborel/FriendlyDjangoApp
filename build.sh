@@ -1,8 +1,5 @@
-#!/usr/bin/env bash
+# Install Dependencies
+pip3 install -r deps.txt
 
-set -o errexit  # exit on error
-
-pip install -r requirements.txt
-
-python manage.py collectstatic --no-input
-python manage.py migrate
+# Run Migration
+python3 manage.py migrate
