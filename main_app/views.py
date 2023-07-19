@@ -3,7 +3,8 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.views import View
-from .models import Post, City, Category
+from django import forms
+from .models import Post, Category
 from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -11,7 +12,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-# categories = [ ]
+choices = Category.objects.all().values_list('name','name')
+choice_list = []
+for item in choices:
+    choice_list.append(item)
+
 
 # Create your views here.
 class Home(TemplateView):
@@ -31,25 +36,54 @@ class PostList(TemplateView):
             context["header"] = "All Posts"
         return context
     
-class CategoryList(TemplateView):
-    template_name = "category_list.html"
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        name = self.request.GET.get("name")
-        if name != None:
-            context["categorys"] = Category.objects.filter(name__icontains=name)
-            context["header"] = f"Searching for {name}"
-        else:
-            context["categorys"] = Category.objects.all()
-            context["header"] = "All Posts"
-        return context
+# class CategoryList(TemplateView):
+#     template_name = "category_list.html"
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         name = self.request.GET.get("name")
+#         if name != None:
+#             context["categorys"] = Category.objects.filter(name__icontains=name)
+#             context["header"] = f"Searching for {name}"
+#         else:
+#             context["categorys"] = Category.objects.all()
+#             context["header"] = "All Posts"
+#         return context
     
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'img', 'body']
+    
+    category = forms.ChoiceField(choices=[])
+
+    def __init__(self, *args, **kwargs):
+        choice_list = kwargs.pop('choice_list', None)
+        super(PostForm, self).__init__(*args, **kwargs)
+        self.fields['category'].choices = [('', 'Select a category')] + choice_list
+
+@method_decorator(login_required, name='dispatch')
+class CategoryCreate(CreateView):
+    model = Category
+    fields = ['name']
+    template_name = "category_create.html"
+    def get_success_url(self):
+        return reverse('post_create')
+
+@method_decorator(login_required, name='dispatch')
 class PostCreate(CreateView):
     model = Post
-    fields = ['title', 'img', 'body']
     template_name = "post_create.html"
+    form_class = PostForm
+
     def get_success_url(self):
         return reverse('post_detail', kwargs={'pk': self.object.pk})
+
+    def get_form_kwargs(self):
+        kwargs = super(PostCreate, self).get_form_kwargs()
+        choices = Category.objects.all().values_list('name', 'name')
+        choice_list = [(item[0], item[0]) for item in choices]
+        kwargs['choice_list'] = choice_list
+        return kwargs
 
 class PostDetail(DetailView):
     model = Post
