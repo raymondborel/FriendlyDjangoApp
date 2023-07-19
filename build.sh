@@ -10,7 +10,12 @@
 
 # video method 
 # Install Dependencies
-pip3 install -r deps.txt
+# pip3 install -r deps.txt
 
 # Run Migration
+# python3 manage.py migrate
+
+pip3 install -r deps.txt
+# Run Migrations
+python manage.py collectstatic --no-input
 python3 manage.py migrate
