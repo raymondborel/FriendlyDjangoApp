@@ -29,7 +29,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=100)
     profile_img = models.CharField(max_length=300)
-    social_link = models.CharField(max_length=200)
+    social_link = models.CharField(max_length=200, default="@nulll")
 
     def __str__(self):
         return str(self.user)

@@ -103,7 +103,7 @@ class PostDelete(DeleteView):
 
 class ProfileCreate(CreateView):
     model = Profile
-    fields = ['bio', 'profile_img']
+    fields = ['bio', 'profile_img', 'social_link']
     template_name = "profile_create.html"
     success_url = '/profiles/'
 
@@ -121,7 +121,7 @@ class Signup(View):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect("post_list")
+            return redirect("profile_create")
         else:
             context = {"form": form}
             return render(request, "registration/signup.html", context)
