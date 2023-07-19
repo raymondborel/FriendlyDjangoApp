@@ -6,6 +6,40 @@
 {% block content %}
 <section class="section">
   <div class="container">
+    <h1 class="title is-1 text-center">Latest Blog Posts</h1>
+    <div class="row">
+      {% for post in posts %}
+      <div class="col-md-4">
+        <a href="{% url 'post_detail' post.pk %}">
+          <div class="card mb-4">
+            <img src="{{post.img}}" alt="{{post.title}}" class="card-img-top" />
+            <div class="card-body">
+              <h2 class="card-title">{{ post.title }}</h2>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% empty %}
+      <div class="col">
+        <div class="alert alert-info" role="alert">
+          No Blog Posts Available
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+
+<!-- {% extends 'base.html' %}
+
+{% comment %} for head title tags and helping us with SEO {% endcomment %}
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
     <h1 class="title is-1 has-text-centered">Latest Blog Posts</h1>
     <div class="columns is-multiline">
       {% for post in posts %}
@@ -19,8 +53,6 @@
                 </figure>
               </div>
               <h2 class="title is-4">{{ post.title }}</h2>
-              <!-- <p class="subtitle is-6">{{ post.description }}</p>
-              <p class="has-text-right has-text-grey-light">{{ post.date }}</p> -->
             </div>
           </div>
         </a>
@@ -37,4 +69,4 @@
     </div>
   </div>
 </section>
-{% endblock %}
+{% endblock %} -->

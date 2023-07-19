@@ -1,22 +1,16 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Add a Post{% endblock %}
 
 {% block content %}
 
-<h1>Add a Post</h1>
-
-<!-- Security Feature -->
-{% csrf_token %}
-
-{% load crispy_forms_tags %}
-<!-- Generate inputs -->
-
-<form method="post" class="my-class">
-    {{ my_formset|crispy }}
-</form>
-
-  <!-- Submit button -->
-  <div class="field">
-    <input type="submit" value="Submit" class="button is-primary" />
-  </div>
-
+  <form method="post" novalidate class="my-form">
+    {% csrf_token %}
+    {{ form|crispy }}
+    
+    <div class="field">
+      <input type="submit" value="Submit" class="button is-primary" />
+    </div>
+    
+  </form>
 {% endblock %}

@@ -3,6 +3,11 @@ body {
     color: #ffffff;
     min-height: 100vh;
 }
+form {
+    /* background-color: #e8a643; */
+    color: #000000;
+    min-height: 10vh;
+}
 
 h1,
 h2,
@@ -16,4 +21,8 @@ h3 {
 .navbar {
     height: 70px;
   }
+/* 
+.my-form {
+    
+} */
   

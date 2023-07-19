@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class City(models.Model):
+    name = models.CharField(max_length=200)
+    def __str__(self):
+        return self.name
+    
 class Category(models.Model):
     name = models.CharField(max_length=200)
     def __str__(self):
@@ -14,7 +19,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1,  related_name='posts')
-    # city
+    city = models.ForeignKey(City, on_delete=models.CASCADE, default=1, related_name='posts')
+    
     def __str__(self):
         return self.title
 

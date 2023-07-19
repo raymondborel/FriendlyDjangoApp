@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-n1dq$ii&w^qhc+c)(0a@q6+(f)f%1!-!w$%^xb$0c^6-srbuz@'
+SECRET_KEY = os.environ.get("SECRET_KEY", "53245h4534k")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = []
 
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_app',
-    'crispy_bulma',
+    'crispy_forms',
+    'crispy_bootstrap4',
     
     
 ]
@@ -125,7 +127,8 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-# CRISPY_TEMPLATE_PACK = 'uni_form'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'main_app/static')]
 
 
