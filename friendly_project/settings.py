@@ -42,9 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_app',
-    'crispy_forms',
-    'crispy_bootstrap4',
-    
     
 ]
 
@@ -90,10 +87,14 @@ CORS_ALLOW_ALL_ORIGINS = True
 # To use Neon with Django, you have to create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
 
 DATABASES = {
-      'default': dj_database_url.config(
-        conn_max_age=600,
-        conn_health_checks=True,
-    ),
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'friendly',
+    'USER': os.environ['DB_USER'],
+    'PASSWORD': os.environ['DB_PW'],
+    'HOST': os.environ['DB_HOST'],
+    'PORT': '5432',
+  }
 }
 
 
@@ -137,8 +138,6 @@ if not DEBUG:
 
 
 STATIC_URL = '/static/'
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
-CRISPY_TEMPLATE_PACK = "bootstrap4"
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'main_app/static')]
 
 

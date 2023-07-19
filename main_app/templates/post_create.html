@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
+
 {% block title %}Add a Post{% endblock %}
 
 {% block content %}
@@ -7,7 +7,7 @@
     <h1 class=" title text-center font-weight-bold text-dark">Create a Category</h1>
     <form method="post" novalidate class="my-form">
       {% csrf_token %}
-      {{ form|crispy }}
+      {{form.as_p}} 
       
       <div class="field">
         <input type="submit" value="Submit" class="button is-primary" />

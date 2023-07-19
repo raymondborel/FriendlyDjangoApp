@@ -1,12 +1,13 @@
 {% extends 'base.html' %} 
-{% load crispy_forms_tags %}
+
 {% block title %} Create your Profile {% endblock %}
 {% block content %}
 
 <h1 class="title mt-5">Create your Profile!</h1>
 <form method="post">
     <div class="font-weight-bold text-dark">
-        {% csrf_token %} {{ form|crispy }}
+        {% csrf_token %} 
+        {{form.as_p}} 
         <input type="submit" class="button is-primary" value="Submit" />
     </div>
 </form>

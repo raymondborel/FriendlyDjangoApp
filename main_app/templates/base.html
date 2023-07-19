@@ -58,6 +58,8 @@
 
           <a href="/categories/new/" class="navbar-item"> Create a Category </a>
 
+          <a href="/profiles/new/" class="navbar-item"> Create a Profile </a>
+
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link"> More </a>
 
@@ -74,20 +76,21 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
+              {% if user.is_authenticated %}
               {% if user.profile %}
-              <a href="{% url 'profile_detail' user.profile.pk %}">Welcome: {{user.username}}</a>
+              <a href="{% url 'profile_detail' user.profile.pk %}">Welcome:{{user.username}}</a>
               {% else %}
               Welcome: {{user.username}}
               {% endif %}
               <a class="navbar-item button is-danger" href="{% url 'logout' %}">Logout</a>
-              
+              {% else %}
               {% if request.path != "/accounts/signup/" %}
               <a href="{% url 'signup' %}" class="button is-primary">
                 <strong>Sign up</strong>
               </a>
               {% if request.path != "/accounts/login/" %}
               <a href="{% url 'login' %}" class="button is-light"> Log in </a>
-              {% endif %} {% endif %} 
+              {% endif %} {% endif %} {% endif %} 
             </div>
           </div>
         </div>
