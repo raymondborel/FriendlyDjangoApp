@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.views import View
 from django import forms
-from .models import Post, Category
+from .models import Post, Category, Profile
 from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -100,6 +100,12 @@ class PostDelete(DeleteView):
     model = Post
     template_name = "post_delete_confirmation.html"
     success_url = "/posts/"
+
+class ProfileCreate(CreateView):
+    model = Profile
+    fields = ['bio', 'profile_img']
+    template_name = "profile_create.html"
+    success_url = '/profiles/'
 
 
 
