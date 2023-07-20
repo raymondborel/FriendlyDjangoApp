@@ -21,8 +21,11 @@ h3 {
 .navbar {
     height: 70px;
   }
-/* 
-.my-form {
-    
-} */
+
+.pic {
+    align-items: center;
+    max-width: 40%;
+    height: auto;
+}
+
   
