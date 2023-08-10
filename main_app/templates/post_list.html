@@ -8,15 +8,16 @@
     <h1 class="title is-1 text-center">Latest Posts</h1>
     <div class="row g-8">
       {% for post in posts %}
-      <div class="col-md-4">
+      <div class="col-md-4"">
         <a href="{% url 'post_detail' post.pk %}">
           <div class="card mb-4 d-flex">
             <img src="{{post.img}}" alt="{{post.title}}"  />
           </div>
         </a>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-8 bg-white">
         <div class="card-body">
+          <h5 class="card-title">{{ post.category }}</h5>
           <p class="card-text">{{ post.body }}</p>
         </div>
       </div>
